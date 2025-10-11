@@ -1,0 +1,341 @@
+/* Reset básico */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0px;
+  padding: 0;
+  background: #050101;
+  background: linear-gradient(29deg, rgb(6, 11, 27) 50%, rgba(110, 255, 146, 1) 250%);
+  background-size: 1920px 2000px;
+  /*color: #707070;*/
+}
+
+/* Encabezado */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background-color: #181717;
+  border-bottom: 1px solid #e7e7e7;
+}
+
+header h1 {
+  font-size: 30px;
+  color: #e7e7e7;
+  margin: 0;
+}
+
+main {
+  padding: 20px;
+  margin: 60px;
+  text-align: center;
+}
+
+main h2 {
+  font-size: 20px;
+  color: #051d12;
+  margin-bottom: 20px;
+}
+
+main h6 {
+  font-size: 50px;
+  color: #9aebc6;
+  margin-bottom: 10px;
+  margin-top: -70px;
+}
+
+/* Menú */
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 35px;
+  margin: 0px;
+  padding: 0;
+  color: #e7e7e7;
+}
+
+nav ul li a {
+  text-decoration: none;
+  font-size: 17px;
+  color: #e7e7e7;
+  font-weight: bold;
+}
+
+nav ul li a:hover {
+  text-decoration: underline;
+}
+
+.free-lesson {
+  display: block;
+  border: 2px solid #03e27e;
+  border-radius: 15px;
+  padding:20px;
+  margin: 20px auto;
+  width: 50%;
+  background-color: #18171744;
+  box-shadow: 0 0 6px #03e27e;
+} 
+
+/* Botón de login */
+.login-btn {
+  background-color: transparent;
+  color: white;
+  border: 1px solid white;
+  padding: 5px 30px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.login-btn:hover {
+  background-color: #555;
+}
+
+.btn-comprar {
+  background-color: #40ffbf;
+  color: rgb(25, 185, 137);
+  border: 2px solid #00ff37;
+  padding: 10px 20px;
+  border-radius: 20px;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  margin-left: 20px;
+  cursor: pointer;
+  box-shadow: inset 3px 3px 20px #ffffff;
+  box-shadow: 0 0 20px #31ffa2;
+  /*display: block;*/
+  align-items: center;
+  animation: shadow-growth 5s infinite alternate; /* Apply the animation */
+}
+
+.btn-comprar:hover {
+  background-color: #00ff40; 
+}
+
+.txt-btn-comprar {
+  font-size: 15px;
+  font-weight: bold;
+  color: rgb(7, 27, 21);
+}
+
+.btn-entrar {
+  background-color: #e3fff6;
+  color: rgb(25, 185, 137);
+  border: 2px solid #00ff37;
+  padding: 10px 20px;
+  border-radius: 20px;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  margin-left: 20px;
+  cursor: pointer;
+  box-shadow: inset 3px 3px 20px #ffffff;
+  box-shadow: 0 0 10px #31ffa2;
+  /*display: block;*/
+  align-items: center;
+}
+
+.btn-entrar:hover {
+  background-color: #00ff40; 
+}
+
+.txt-btn-entrar {
+  font-size: 15px;
+  font-weight: bold;
+  color: rgb(7, 27, 21);
+}
+
+/* Botón de crear cuenta */
+.subscribe-btn {
+  background-color: #40ffbf;
+  color: rgb(25, 185, 137);
+  border: 2px solid #00ff37;
+  padding: 0px 40px;
+  border-radius: 20px;
+  margin-top: 35px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  box-shadow: inset 3px 3px 20px #ffffff;
+  box-shadow: 0 0 20px #31ffa2;
+  /*display: block;*/
+  align-items: center;
+  animation: shadow-growth 5s infinite alternate; /* Apply the animation */
+}
+
+.subscribe-btn:hover {
+  background-color: #00ff9d; 
+} 
+
+@keyframes shadow-growth {
+  0% {
+    box-shadow: 0 0 5px 0px rgba(0, 0, 0, 0.5); /* Initial state: small blur, no spread */
+  }
+  50% {
+    box-shadow: 0 0 20px 10px rgba(4, 255, 150, 0.986); /* Mid-point: larger blur, some spread */
+  }
+  100% {
+    box-shadow: 0 0 5px 0px rgba(0, 0, 0, 0.5); /* Final state: back to initial size */
+  }
+}
+
+.generic-btn {
+  background-color: #40ffbf;
+  color: rgb(25, 185, 137);
+  border: 2px solid #00ff37;
+  padding: 0px 40px;
+  border-radius: 20px;
+  margin-top: 35px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  box-shadow: inset 3px 3px 20px #ffffff;
+  box-shadow: 0 0 20px #31ffa2;
+  /*display: block;*/
+  align-items: center;
+}
+
+.generic-btn:hover {
+  background-color: #00ff9d; 
+}
+
+/* Imagen principal */
+.hero-img {
+  max-width: 100%;
+  height: auto;
+  margin: 0px auto;
+  align-items: center;
+  display: none;
+}
+
+/* Contenido principal */
+main {
+  padding: 100px 5px;
+  text-align: center;
+  font-size: 25px;
+  text-shadow: 2px 2px 2px #161616;
+  color: #9aebc6;
+}
+
+main div {
+  display: flex;
+  width: 60%;
+  padding: 0px 673px;
+}
+
+/* Secciones */
+section {
+  margin: 30px 0;
+}
+
+.dropdown {
+  display: block;
+  align-items: center;
+  width: 8%;
+  padding: 0px;
+  margin-top: 15px;
+  margin-left: 20px;
+  margin-right: 0px;
+  margin-bottom: 15px;
+  border: 3px solid #ccc;
+  border-radius: 5px;
+  border-color: #9aebc6;
+  background-color: #a8a8a8;
+  color: #e7e7e7;
+}
+
+.dropdown:focus {
+  background: #333333;
+  border: 3px solid;
+  border-color: #03e27e;
+  outline: none;
+}
+
+.number-input {
+  display: block;
+  align-items: center;
+  width: 23%;
+  padding: 15px;
+  margin-top: 15px;
+  margin-left: 20px;
+  margin-right: 0px;
+  margin-bottom: 15px;
+  border: 3px solid #ccc;
+  border-radius: 5px;
+  border-color: #9aebc6;
+  background-color: #a8a8a8;
+  color: #e7e7e7;
+}
+
+.number-input:focus {
+  background: #333333;
+  border: 3px solid;
+  border-color: #03e27e;
+  outline: none;
+}
+
+/* Formularios */
+.input-field {
+  display: block;
+  align-items: center;
+  width: 20%;
+  padding: 15px;
+  margin-top: 15px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 15px;
+  border: 3px solid #ccc;
+  border-radius: 5px;
+  border-color: #9aebc6;
+  background-color: #a8a8a8;
+  color: #e7e7e7;
+}
+
+.input-field:focus {
+  background: #333333;
+  border: 3px solid;
+  border-color: #03e27e;
+  outline: none;
+}
+
+section h1{
+    font-size: 30px;
+    color: #000000;
+    text-shadow: 0 0 5px #43fcc4;
+}
+
+section h2 {
+  font-size: 38px;
+  margin-bottom: 10px;
+}
+
+.free-content-div {
+  display: block;
+  border: 2px solid #03e27e;
+  border-radius: 15px;
+  padding: 20px;
+  margin: 20px auto;
+  width: 50%;
+  background-color: #181717;
+  box-shadow: 0 0 6px #03e27e;
+  ;
+}
+
+.curso-card {
+  display: block;
+  background-color: #14ffa536;
+  backdrop-filter: blur(20px);
+  border: 2px solid #03e27e;
+  border-radius: 15px;
+  padding: 20px;
+  margin: 20px auto;
+  margin-bottom: 40px;
+  width: 50%;
+  box-shadow: 0 0 6px #03e27e;
+}
+
+/*div {
+  width: 320px;
+  height: 300px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgb(77, 255, 187);
+  margin: auto;
+}*/

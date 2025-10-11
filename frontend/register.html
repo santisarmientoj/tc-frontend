@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Registro - Academia</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="quienes.html">¿Quiénes somos?</a></li>
+        <li><a href="cursos.html">Cursos</a></li>
+        <li><a href="profesores.html">Profesores</a></li>
+      </ul>
+    </nav>
+    <button class="login-btn" onclick="location.href='login.html'"><p>Login</p></button>
+  </header>
+
+  <main>
+      <h1>Crear una cuenta</h1>
+        <form id="registerForm">
+          <input class="input-field" type="text" id="name" placeholder="Nombre y apellido" required>
+          <input class="input-field" type="email" id="email" placeholder="Correo" required>
+              <div style="display: flex; gap: 5px;">
+                <select class="dropdown" id="countryCode" required>
+                  <option value="+57">🇨🇴 +57</option>
+                  <option value="+34">🇪🇸 +34</option>
+                  <option value="+1">🇺🇸 +1</option>
+                  <option value="+52">🇲🇽 +52</option>
+                  <option value="+49">🇩🇪 +49</option>
+                  <!-- puedes agregar más según tus necesidades -->
+                </select>
+                <input class="number-input" type="tel" id="phoneNumber" placeholder="Número de teléfono" required>
+              </div>
+          <input class="input-field" type="password" id="password" placeholder="Contraseña" required> 
+          <button class="generic-btn" type="submit"><h2>Registrarme</h2></button>
+        </form>  
+      <p id="error-msg" style="color:red;"></p>
+  </main>
+
+  <!-- Firebase Scripts -->
+  <script type="module" src="firebase-config.js"></script>
+  <script type="module" src="register.js"></script>
+</body>
+</html>

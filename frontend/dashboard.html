@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard - Academia</title>
+  <script type="module" src="./dashboard.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+  <script src="https://js.stripe.com/v3/"></script>
+  <script type="module" src="./dashboard.js"></script>
+<body>
+  <header>
+    <h1><button class="login-btn">Tu Panel de Cursos</button></h1>
+    <button class="login-btn" id="logout">Cerrar sesión</button>
+  </header>
+
+  <main>
+    <h1>Bienvenido 🎶</h1>
+    <p>Aquí encontrarás los cursos disponibles. Compra los que quieras y accede cuando quieras.</p>
+
+        <div class="free-lesson">
+          <h1>Clase gratuita</h1>
+          <p>Disfruta de una clase de cortesía para iniciar tu camino</p>
+          <button class="btn-entrar" id="free-lesson-btn" onclick="location.href='curso-gratis.html'"><h4>Ingreso a la clase</h4></button>
+        </div>
+
+    <section id="cursos">
+      <!-- Los cursos se cargarán dinámicamente -->
+    </section>
+  </main>
+</body>
+</html>
+
+
+
+

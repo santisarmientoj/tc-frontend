@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Academia</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Encabezado con menú y botón -->
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="quienes.html">¿Quiénes somos?</a></li>
+        <li><a href="cursos.html">Cursos</a></li>
+        <li><a href="profesores.html">Profesores</a></li>
+      </ul>
+    </nav>
+
+    <button class="login-btn" onclick="location.href='login.html'"><p>Login</p></button>
+  </header>
+
+  <!-- Contenido principal -->
+  <main>
+    <h1>Bienvenido a Tutoriales Cristianos</h1>
+    <img src="Imagenes\close-up-man-playing-acoustic-guitar-dark-with-stage-lighting.jpg" alt="Imagen de la Academia" class="hero-img">
+
+    <section>
+      <h3>Nuestra misión</h3>
+      <p>Formar estudiantes con excelencia académica y valores humanos.</p>
+      <h3>Únete a una comunidad de mas de 800 estudiantes</h3>
+      <button class="generic-btn" onclick="location.href='register.html'"><h1>Regístrate</h1></button>
+    </section>
+  </main>
+</body>
+</html>
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js"></script>
+<script type="module" src="./firebase-config.js"></script>
+<script type="module" src="./login.js"></script>
+
+
+

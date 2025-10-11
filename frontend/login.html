@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - Academia</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="quienes.html">¿Quiénes somos?</a></li>
+        <li><a href="cursos.html">Cursos</a></li>
+        <li><a href="profesores.html">Profesores</a></li>
+      </ul>
+    </nav>
+    <button class="login-btn" onclick="location.href='login.html'"><p>Login</p></button>
+  </header>
+
+  <main>
+    <h1>Iniciar Sesión</h1>
+    <form id="loginForm">
+      <input class="input-field" type="email" id="email" placeholder="Correo" required>
+      <input class="input-field" type="password" id="password" placeholder="Contraseña" required>
+      <button class="generic-btn" type="submit"><h2>Entrar</h2></button>
+    </form>
+    <p>¿No tienes cuenta? <a href="register.html">Regístrate aquí</a></p>
+    <p id="error-msg" style="color:red;"></p>
+  </main>
+
+  <!-- Scripts -->
+  <script type="module" src="firebase-config.js"></script>
+  <script type="module" src="login.js"></script>
+</body>
+</html>
+
+
+
+
