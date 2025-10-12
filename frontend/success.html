@@ -39,7 +39,7 @@
   <div class="card">
     <h1>✅ ¡Pago exitoso!</h1>
     <p id="details">Cargando detalles de tu compra...</p>
-    <a href="http://localhost:3000/dashboard.html">Ir al Dashboard</a>
+    <a href="dashboard.html">Ir al Dashboard</a>
   </div>
 
   <script>
@@ -48,7 +48,7 @@
     const sessionId = urlParams.get('session_id');
 
     if (sessionId) {
-      fetch(`http://localhost:3000/checkout-session?session_id=${sessionId}`)
+      fetch(`https://api.tutorialescristianos.app/checkout-session?session_id=${sessionId}`)
         .then(res => res.json())
         .then(session => {
           document.getElementById('details').textContent =
