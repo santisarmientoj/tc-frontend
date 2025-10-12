@@ -27,7 +27,7 @@ auth.onAuthStateChanged(async (user) => {
     const token = await user.getIdToken();
 
     // 🔸 Validar si el usuario compró el curso
-    const res = await fetch(`${BACKEND_URL}/verify-purchase`, {
+    const res = await fetch(`${BACKEND_URL}/api/services/verify-purchase`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -38,6 +38,7 @@ auth.onAuthStateChanged(async (user) => {
         courseId: "curso-armonia",
       }),
     });
+
 
 
     const data = await res.json();
