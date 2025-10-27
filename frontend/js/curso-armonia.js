@@ -90,10 +90,10 @@ function handleVerificationResult(data) {
   }
 
   // ✅ Tiene acceso → cargar video
-  loadVideo();
+  //loadVideo();
 }
 
-async function loadVideo() {
+/*async function loadVideo() {
   try {
     const user = auth.currentUser;
     const token = await user.getIdToken();
@@ -144,7 +144,7 @@ async function loadVideo() {
       <a href="dashboard.html">Volver al panel</a>
     `;
   }
-}
+}*/
 
 
 
