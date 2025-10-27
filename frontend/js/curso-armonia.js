@@ -104,8 +104,13 @@ async function loadVideo() {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ courseId: "armonia" }),
+      body: JSON.stringify({
+        idToken: token,
+        courseId: "armonia",
+        videoId: "JrQbOTqeZchg9Aj87IN02RBiCvd2dIJMGfizE9VPiqE8" // <- reemplaza por el ID real del video
+      }),
     });
+
 
     if (!videoRes.ok) {
       const txt = await videoRes.text().catch(() => null);
