@@ -1,50 +1,102 @@
 // curso-armonia.js
+import { auth } from "../firebase-config.js";
 
 const content = document.getElementById("content");
 const logoutBtn = document.getElementById("logoutBtn");
 
 const BACKEND_URL = "https://tc-backend-qew7.onrender.com";
 
-// 🔹 Cerrar sesión (simplemente redirige)
-logoutBtn.addEventListener("click", () => {
-  // Aquí asumimos que la sesión se maneja en otra parte
+logoutBtn.addEventListener("click", async () => {
+  await auth.signOut();
   window.location.href = "login.html";
 });
 
-(async () => {
-  try {
-    // 🔹 Obtener token del almacenamiento local (ya generado en el login)
-    const token = localStorage.getItem("userToken");
-    console.log("Token obtenido:", token);
-    if (!token) {
-      content.innerHTML = `
-        <p>Tu sesión no es válida o ha expirado.</p>
-        <a href="login.html">Iniciar sesión</a>
-      `;
-      return;
-    }
+auth.onAuthStateChanged(async (user) => {
+  if (!user) {
+    content.innerHTML = `
+      <p>Debes iniciar sesión para acceder a este curso.</p>
+      <a href="login.html">Ir al inicio de sesión</a>
+    `;
+    return;
+  }
 
-    // 🔹 Verificar acceso al curso
-    const res = await fetch(`${BACKEND_URL}/api/services/verify-purchase`, {
+  try {
+    // Intentamos obtener token; forzar refresh si falla luego
+    let token = await user.getIdToken();
+    console.log("Frontend: ID token obtenido (long):", token?.slice(0, 20) + "...");
+
+    // Petición al backend para verificar compra
+    const verifyRes = await fetch(`${BACKEND_URL}/api/services/verify-purchase`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Accept": "application/json",
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({ courseId: "curso-armonia" }),
     });
 
-    const data = await res.json();
+    // Si no es ok, intentar forzar refresh del token una vez
+    if (!verifyRes.ok) {
+      console.warn("verify-purchase returned status", verifyRes.status);
+      // Si es 401/403 puede ser token expirado; refrescamos y reintentamos
+      if (verifyRes.status === 401 || verifyRes.status === 403) {
+        console.log("Forzando refresh del ID token y reintentando...");
+        token = await user.getIdToken(true); // forzar refresh
+        console.log("Nuevo token:", token?.slice(0, 20) + "...");
+        const retry = await fetch(`${BACKEND_URL}/api/services/verify-purchase`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ courseId: "armonia" }),
+        });
 
-    if (!data.accessGranted) {
-      content.innerHTML = `
-        <p>No tienes acceso a este curso.</p>
-        <a href="dashboard.html">Volver al panel</a>
-      `;
-      return;
+        if (!retry.ok) {
+          const text = await retry.text().catch(()=>null);
+          console.error("Retry failed:", retry.status, text);
+          throw new Error(`Backend rejected (after refresh): ${retry.status}`);
+        }
+
+        const data = await retry.json();
+        handleVerificationResult(data);
+      } else {
+        const text = await verifyRes.text().catch(()=>null);
+        throw new Error(`Backend error: ${verifyRes.status} - ${text}`);
+      }
+    } else {
+      const data = await verifyRes.json();
+      handleVerificationResult(data);
     }
 
-    // 🔹 Obtener video
+  } catch (error) {
+    console.error("Error en flujo de verificación:", error);
+    content.innerHTML = `
+      <p>Ocurrió un error al verificar el acceso. Revisa la consola.</p>
+      <a href="dashboard.html">Volver al panel</a>
+    `;
+  }
+});
+
+function handleVerificationResult(data) {
+  if (!data || !data.accessGranted) {
+    content.innerHTML = `
+      <p>No tienes acceso a este curso.</p>
+      <a href="dashboard.html">Volver al panel</a>
+    `;
+    return;
+  }
+
+  // Si tiene acceso, solicitamos playback token
+  loadVideo();
+}
+
+async function loadVideo() {
+  try {
+    const user = auth.currentUser;
+    const token = await user.getIdToken();
+
     const videoRes = await fetch(`${BACKEND_URL}/api/videos/playback-token`, {
       method: "POST",
       headers: {
@@ -54,36 +106,37 @@ logoutBtn.addEventListener("click", () => {
       body: JSON.stringify({ courseId: "curso-armonia" }),
     });
 
+    if (!videoRes.ok) {
+      const txt = await videoRes.text().catch(()=>null);
+      throw new Error(`Video endpoint error ${videoRes.status}: ${txt}`);
+    }
+
     const videoData = await videoRes.json();
 
     if (!videoData?.playbackId || !videoData?.token) {
       throw new Error("No se pudo obtener el video del curso");
     }
 
-    // 🔹 Mostrar el video
     content.innerHTML = `
       <h2>Bienvenido al Curso de Armonía</h2>
       <mux-player
         playback-id="${videoData.playbackId}"
-        env-key="mux-player"
-        tokens="${videoData.token}"
         stream-type="on-demand"
+        tokens="${videoData.token}"
         style="width:100%; max-width:900px; aspect-ratio:16/9; border-radius:12px; margin-top:20px;"
       ></mux-player>
     `;
 
-    // 🔹 Cargar script de Mux
     const script = document.createElement("script");
     script.src = "https://cdn.jsdelivr.net/npm/@mux/mux-player";
     document.body.appendChild(script);
-  } catch (error) {
-    console.error(error);
-    content.innerHTML = `
-      <p>Ocurrió un error al verificar el acceso.</p>
-      <a href="dashboard.html">Volver al panel</a>
-    `;
+
+  } catch (err) {
+    console.error("Error cargando video:", err);
+    content.innerHTML = `<p>Error cargando video. Revisa la consola.</p><a href="dashboard.html">Volver al panel</a>`;
   }
-})();
+}
+
 
 
 
