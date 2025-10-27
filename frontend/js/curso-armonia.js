@@ -4,7 +4,7 @@ import { auth } from "../firebase-config.js";
 const content = document.getElementById("content");
 const logoutBtn = document.getElementById("logoutBtn");
 
-const BACKEND_URL = "https://tc-backend-qew7.onrender.com";
+const BACKEND_URL = "https://api.tutorialescristianos.app";
 
 logoutBtn.addEventListener("click", async () => {
   await auth.signOut();
