@@ -25,9 +25,10 @@ auth.onAuthStateChanged(async (user) => {
   try {
     // 🔸 Obtener el ID token de Firebase (para verificar en backend)
     const token = await user.getIdToken();
+    console.log("ID Token:", token);
 
     // 🔸 Validar si el usuario compró el curso
-    let res = await fetch(`${BACKEND_URL}/api/services/verify-purchase`, {
+    const res = await fetch(`${BACKEND_URL}/api/services/verify-purchase`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
