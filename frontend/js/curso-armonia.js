@@ -23,9 +23,8 @@ auth.onAuthStateChanged(async (user) => {
   }
 
   try {
-    // 🔸 Obtener el ID token de Firebase (para verificar en backend)
+    /*// 🔸 Obtener el ID token de Firebase (para verificar en backend)
     const token = await user.getIdToken();
-    console.log("ID Token:", token);
 
     // 🔸 Validar si el usuario compró el curso
     const res = await fetch(`${BACKEND_URL}/api/services/verify-purchase`, {
@@ -38,7 +37,7 @@ auth.onAuthStateChanged(async (user) => {
         userId: user.uid,
         courseId: "curso-armonia",
       }),
-    });
+    });*/
 
 
 
