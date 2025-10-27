@@ -1,10 +1,8 @@
-import { auth } from "../firebase-config.js";
+import { auth, db } from "../firebase-config.js";
+import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 
 const content = document.getElementById("content");
 const logoutBtn = document.getElementById("logoutBtn");
-
-// 🔹 URL del backend (Render)
-const BACKEND_URL = "https://tc-backend-qew7.onrender.com";
 
 // 🔹 Cerrar sesión
 logoutBtn.addEventListener("click", async () => {
@@ -23,27 +21,25 @@ auth.onAuthStateChanged(async (user) => {
   }
 
   try {
-    /*// 🔸 Obtener el ID token de Firebase (para verificar en backend)
-    const token = await user.getIdToken();
+    // 🔸 Obtener los datos del usuario desde Firestore
+    const userRef = doc(db, "users", user.uid);
+    const userSnap = await getDoc(userRef);
 
-    // 🔸 Validar si el usuario compró el curso
-    const res = await fetch(`${BACKEND_URL}/api/services/verify-purchase`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        userId: user.uid,
-        courseId: "curso-armonia",
-      }),
-    });*/
+    if (!userSnap.exists()) {
+      content.innerHTML = `
+        <p>No se encontraron tus datos de usuario.</p>
+        <a href="dashboard.html">Volver al panel</a>
+      `;
+      return;
+    }
 
+    const userData = userSnap.data();
 
+    // 🔸 Verificar si el usuario tiene comprado el curso
+    const purchasedCourses = userData.purchasedCourses || [];
+    const hasAccess = purchasedCourses.includes("curso-armonia");
 
-    const data = await res.json();
-
-    if (!data.accessGranted) {
+    if (!hasAccess) {
       content.innerHTML = `
         <p>No tienes acceso a este curso.</p>
         <a href="dashboard.html">Volver al panel</a>
@@ -51,29 +47,11 @@ auth.onAuthStateChanged(async (user) => {
       return;
     }
 
-    // 🔸 Si el usuario tiene acceso, cargar el video desde Mux con playback token
-    const videoRes = await fetch(`${BACKEND_URL}/api/videos/playback-token`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({ courseId: "curso-armonia" }),
-    });
-
-    const videoData = await videoRes.json();
-
-    if (!videoData || !videoData.playbackId || !videoData.token) {
-      throw new Error("No se pudo obtener el video del curso");
-    }
-
-    // 🔹 Insertar el reproductor Mux
+    // 🔸 Si el usuario tiene acceso, mostrar el contenido del curso
     content.innerHTML = `
       <h2>Bienvenido al Curso de Armonía</h2>
       <mux-player
-        playback-id="${videoData.playbackId}"
-        env-key="mux-player"
-        tokens="${videoData.token}"
+        playback-id="TU_PLAYBACK_ID_AQUI"
         stream-type="on-demand"
         style="width:100%; max-width:900px; aspect-ratio:16/9; border-radius:12px; margin-top:20px;"
       ></mux-player>
@@ -92,3 +70,4 @@ auth.onAuthStateChanged(async (user) => {
     `;
   }
 });
+
