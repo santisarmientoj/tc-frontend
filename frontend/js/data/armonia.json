@@ -1,0 +1,18 @@
+{
+  "title": "Curso de Armonía",
+  "description": "Aprende los fundamentos de la armonía moderna y aplicada al Worship.",
+  "lessons": [
+    {
+      "title": "Introducción al Curso",
+      "playbackId": "4yX00InsDRWssYPjr9iMYR014SNiG7tKZ1t381z6NxuI00"
+    },
+    {
+      "title": "Los Acordes Mayores",
+      "playbackId": "XB6ZYHM5zanIzMzKv01KWnghKLhfb02n5d2MlJiLt534o"
+    },
+    {
+      "title": "Los Acordes Menores",
+      "playbackId": "wS1l7rP01v4kjVzYTVRhIKdHHSEkwn2pxIcZ5uw2EsjU"
+    }
+  ]
+}
