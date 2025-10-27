@@ -339,3 +339,32 @@ section h2 {
   border: 1px solid rgb(77, 255, 187);
   margin: auto;
 }*/
+
+#container {
+  display: flex;
+  gap: 20px;
+}
+
+#lesson-list {
+  width: 250px;
+  background: #f5f5f5;
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.lesson-item {
+  padding: 10px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.lesson-item:hover {
+  background: #e0e0e0;
+}
+
+mux-player {
+  display: block;
+  width: 100%;
+}
