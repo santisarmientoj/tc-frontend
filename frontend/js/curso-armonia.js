@@ -98,7 +98,7 @@ async function loadVideo() {
     const user = auth.currentUser;
     const token = await user.getIdToken();
 
-    const videoRes = await fetch(`${BACKEND_URL}/api/videos/playback-token`, {
+    const videoRes = await fetch(`${BACKEND_URL}/api/playback-token`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
