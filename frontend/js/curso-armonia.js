@@ -26,7 +26,7 @@ auth.onAuthStateChanged(async (user) => {
     console.log("Frontend: ID token obtenido (long):", token?.slice(0, 20) + "...");
 
     // Petición al backend para verificar compra
-    const verifyRes = await fetch(`${BACKEND_URL}/api/routes/verify-purchase`, {
+    const verifyRes = await fetch(`${BACKEND_URL}/api/verify-purchase`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -43,7 +43,7 @@ auth.onAuthStateChanged(async (user) => {
         console.log("Forzando refresh del ID token y reintentando...");
         token = await user.getIdToken(true); // forzar refresh
         console.log("Nuevo token:", token?.slice(0, 20) + "...");
-        const retry = await fetch(`${BACKEND_URL}/api/routes/verify-purchase`, {
+        const retry = await fetch(`${BACKEND_URL}/api/verify-purchase`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
