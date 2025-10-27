@@ -37,11 +37,17 @@ function renderLessons(lessons) {
 // 🔹 Cargar un video de Mux
 function loadVideo(playbackId) {
   content.innerHTML = `
-    <mux-player
+    <!--<mux-player
       playback-id="${playbackId}"
       stream-type="on-demand"
       style="width:100%; max-width:900px; aspect-ratio:16/9; border-radius:12px; margin-top:20px;"
-    ></mux-player>
+    ></mux-player>-->
+    <iframe
+  src="https://player.mux.com/${playbackId}?metadata-video-title=14&video-title=14"
+  style="width: 100%; border: none; aspect-ratio: 16/9;"
+  allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+  allowfullscreen
+></iframe>
   `;
 }
 
