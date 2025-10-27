@@ -26,11 +26,10 @@ auth.onAuthStateChanged(async (user) => {
     console.log("Frontend: ID token obtenido (long):", token?.slice(0, 20) + "...");
 
     // Petición al backend para verificar compra
-    const verifyRes = await fetch(`${BACKEND_URL}/api/services/verify-purchase`, {
+    const verifyRes = await fetch(`${BACKEND_URL}/api/verify-purchase`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Accept": "application/json",
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({ courseId: "armonia" }),
@@ -103,7 +102,7 @@ async function loadVideo() {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ courseId: "curso-armonia" }),
+      body: JSON.stringify({ courseId: "armonia" }),
     });
 
     if (!videoRes.ok) {
