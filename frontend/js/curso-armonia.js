@@ -15,6 +15,7 @@ logoutBtn.addEventListener("click", () => {
   try {
     // 🔹 Obtener token del almacenamiento local (ya generado en el login)
     const token = localStorage.getItem("userToken");
+    console.log("Token obtenido:", token);
     if (!token) {
       content.innerHTML = `
         <p>Tu sesión no es válida o ha expirado.</p>
