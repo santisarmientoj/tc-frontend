@@ -1,37 +1,36 @@
 // curso-armonia.js
-import { auth } from "../firebase-config.js";
 
 const content = document.getElementById("content");
 const logoutBtn = document.getElementById("logoutBtn");
 
 const BACKEND_URL = "https://tc-backend-qew7.onrender.com";
 
-logoutBtn.addEventListener("click", async () => {
-  await auth.signOut();
+// 🔹 Cerrar sesión (simplemente redirige)
+logoutBtn.addEventListener("click", () => {
+  // Aquí asumimos que la sesión se maneja en otra parte
   window.location.href = "login.html";
 });
 
-auth.onAuthStateChanged(async (user) => {
-  if (!user) {
-    content.innerHTML = `
-      <p>Debes iniciar sesión para acceder a este curso.</p>
-      <a href="login.html">Ir al inicio de sesión</a>
-    `;
-    return;
-  }
-
+(async () => {
   try {
-    const token = await user.getIdToken();
+    // 🔹 Obtener token del almacenamiento local (ya generado en el login)
+    const token = localStorage.getItem("userToken");
+    if (!token) {
+      content.innerHTML = `
+        <p>Tu sesión no es válida o ha expirado.</p>
+        <a href="login.html">Iniciar sesión</a>
+      `;
+      return;
+    }
 
+    // 🔹 Verificar acceso al curso
     const res = await fetch(`${BACKEND_URL}/api/services/verify-purchase`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({
-        courseId: "curso-armonia",
-      }),
+      body: JSON.stringify({ courseId: "curso-armonia" }),
     });
 
     const data = await res.json();
@@ -44,6 +43,7 @@ auth.onAuthStateChanged(async (user) => {
       return;
     }
 
+    // 🔹 Obtener video
     const videoRes = await fetch(`${BACKEND_URL}/api/videos/playback-token`, {
       method: "POST",
       headers: {
@@ -59,6 +59,7 @@ auth.onAuthStateChanged(async (user) => {
       throw new Error("No se pudo obtener el video del curso");
     }
 
+    // 🔹 Mostrar el video
     content.innerHTML = `
       <h2>Bienvenido al Curso de Armonía</h2>
       <mux-player
@@ -70,6 +71,7 @@ auth.onAuthStateChanged(async (user) => {
       ></mux-player>
     `;
 
+    // 🔹 Cargar script de Mux
     const script = document.createElement("script");
     script.src = "https://cdn.jsdelivr.net/npm/@mux/mux-player";
     document.body.appendChild(script);
@@ -80,6 +82,7 @@ auth.onAuthStateChanged(async (user) => {
       <a href="dashboard.html">Volver al panel</a>
     `;
   }
-});
+})();
+
 
 
