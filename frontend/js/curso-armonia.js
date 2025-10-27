@@ -107,7 +107,7 @@ async function loadVideo() {
       body: JSON.stringify({
         idToken: token,
         courseId: "armonia",
-        videoId: "JrQbOTqeZchg9Aj87IN02RBiCvd2dIJMGfizE9VPiqE8" // <- reemplaza por el ID real del video
+        videoId: "4yX00InsDRWssYPjr9iMYR014SNiG7tKZ1t381z6NxuI00" // <- reemplaza por el ID real del video
       }),
     });
 
