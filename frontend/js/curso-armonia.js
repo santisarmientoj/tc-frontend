@@ -33,7 +33,7 @@ auth.onAuthStateChanged(async (user) => {
         "Accept": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ courseId: "curso-armonia" }),
+      body: JSON.stringify({ courseId: "armonia" }),
     });
 
     // Si no es ok, intentar forzar refresh del token una vez
