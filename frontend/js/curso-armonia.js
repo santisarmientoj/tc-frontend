@@ -26,7 +26,7 @@ auth.onAuthStateChanged(async (user) => {
     console.log("Frontend: ID token obtenido (long):", token?.slice(0, 20) + "...");
 
     // Petición al backend para verificar compra
-    const verifyRes = await fetch(`${BACKEND_URL}/api/routew/verify-purchase`, {
+    const verifyRes = await fetch(`${BACKEND_URL}/api/routes/verify-purchase`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
